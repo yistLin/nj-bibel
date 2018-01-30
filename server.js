@@ -15,32 +15,9 @@ var defn = require('./settings'),
     abbr_booknames = defn.abbr_booknames,
     strings = defn.strings;
 
-// check logged in
-function checkAuth (req, res, next) {
-    if (req.url.substring(0, 6) !== '/login') {
-        console.log('Request page', req.url)
-        if (!req.session || !req.session.authenticated) {
-            console.log('Auth error, redirect to /login')
-            res.redirect('/login?url='+encodeURIComponent(req.url))
-            return
-        }
-        else {
-            console.log('Auth success!')
-        }
-    }
-    next()
-}
-
 app.use(parser.urlencoded({extended: true}))
 app.use(parser.json())
 app.use(express.static('public'))
-app.use(session({
-    secret: 'example',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {secure: false}
-}))
-app.use(checkAuth)
 
 // get JSON file of bibles
 var bible = {}
@@ -170,27 +147,6 @@ app.get('/search', function(req, res) {
     }
 
     res.render('search.ejs', {lang: lang, results: matches})
-})
-
-app.get('/login', function(req, res) {
-    console.log('Request /login, with url =', req.query.url)
-    res.render('login.ejs', {request_url: req.query.url})
-})
-
-app.post('/login', function(req, res) {
-    console.log('POST to /login')
-    if (req.body.username && req.body.username === "saints" && req.body.password && req.body.password === "welcome") {
-        console.log('Login successed!')
-        var day = 604800000
-        var twoweeks = day * 14
-        req.session.cookie.expires = new Date(Date.now() + twoweeks)
-        req.session.cookie.maxAge = twoweeks
-        req.session.authenticated = true
-        res.redirect(req.body.url)
-    } else {
-        console.log('Login failed!')
-        res.redirect(req.body.url)
-    }
 })
 
 // error handling
