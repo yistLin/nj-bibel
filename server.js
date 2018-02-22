@@ -1,23 +1,22 @@
-// NJ-Bibel
-var express = require('express'),
-    session = require('express-session'),
-    parser = require('body-parser'),
-    fs = require('fs'),
-    app = express();
+// server.js
+const express = require('express'),
+      fs = require('fs'),
+      app = express()
 
-app.engine('html', require('ejs').renderFile)
 
 // definitions
-var defn = require('./settings'),
-    nb_chapters = defn.nb_chapters,
-    testament = defn.testament,
-    booknames = defn.booknames,
-    abbr_booknames = defn.abbr_booknames,
-    strings = defn.strings;
+const defn = require('./settings'),
+      nb_chapters = defn.nb_chapters,
+      testament = defn.testament,
+      booknames = defn.booknames,
+      abbr_booknames = defn.abbr_booknames,
+      strings = defn.strings
 
-app.use(parser.urlencoded({extended: true}))
-app.use(parser.json())
+
+// configurations
+app.set('view engine', 'ejs')
 app.use(express.static('public'))
+
 
 // get JSON file of bibles
 var bible = {}
@@ -30,6 +29,8 @@ bible['nfnt']['ch'] = JSON.parse(fs.readFileSync('data/bible_chinese.json', 'utf
 bible['nfnt']['en'] = bible['en']
 footnote['ch'] = JSON.parse(fs.readFileSync('data/footnote.json', 'utf8'))
 
+
+// routing
 app.get('/', function(req, res) {
     var lang = req.query.lang
     if (lang === undefined) {
@@ -149,16 +150,16 @@ app.get('/search', function(req, res) {
     res.render('search.ejs', {lang: lang, results: matches})
 })
 
+
 // error handling
 app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.status(500).send('Something bad happened!')
 })
 
+
 // start the server
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+    ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
 app.listen(port, ip)
 console.log('Server running on http://%s:%s', ip, port)
-
-module.exports = app
