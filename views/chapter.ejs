@@ -15,7 +15,7 @@
 
     <div class="row">
 
-      <div class="col-md-3 mt-2">
+      <div class="col-lg-3 mt-2">
         <div class="card">
           <div class="card-body">
             <h6 class="card-title">快速前往</h6>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="col-md-9 mt-2">
+      <div class="col-lg-9 mt-2">
         <div class="card">
 
           <div class="card-header text-center bg-info">
@@ -83,6 +83,19 @@
               </tbody>
             </table>
           </div> <!-- card-body -->
+
+          <div class="card-footer clearfix">
+            <% if (prevChapterURL.length != 0) { %>
+            <a class="btn btn-link float-left" href="<%= prevChapterURL %>">
+              <span aria-hidden="true">&larr;</span> Prev
+            </a>
+            <% } %>
+            <% if (nextChapterURL.length != 0) { %>
+            <a class="btn btn-link float-right" href="<%= nextChapterURL %>">
+              Next <span aira-hidden="true">&rarr;</span>
+            </a>
+            <% } %>
+          </div> <!-- card-footer -->
 
         </div>
       </div>
