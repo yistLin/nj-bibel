@@ -25,12 +25,10 @@ body {
     background-color: #F7F7F7;
 }
 
-#verse_container {
-}
-
 #chapterTitle {
     font-size: 20px;
     color: #2B2B2B;
+    display: inline-block;
 }
 
 .v_number {
@@ -91,14 +89,10 @@ body {
 .change-link {
     text-decoration: none;
     cursor: pointer;
-    color: #efefef;
-    display: block;
-    width: 100%;
     margin-top: 15px;
 }
 .change-link:hover {
     text-decoration: none;
-    color: #efefef;
 }
 
 .notes {
@@ -133,56 +127,9 @@ body {
     hyphens: auto;
 }
 
-.modal-backdrop {
-    background-color: black;
-}
-
 .versenum {
     text-align: center;
     vertical-align: center;
-}
-
-.loading-modal {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .5 ) 
-                url('../img/loading.gif')
-                50% 50% 
-                no-repeat;
-}
-
-/* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
-body.loading {
-    overflow: hidden;   
-}
-
-/* Anytime the body has the loading class, our
-   modal element will be visible */
-body.loading .loading-modal {
-    display: block;
-}
-
-.modal-backdrop.in {
-    opacity: 0.5 !important;
-    height: 100%;
-    position: fixed;
-}
-
-.testament-title {
-    padding-bottom: 0.3em;
-    margin-right: 2em;
-    border-bottom: 2px #999 solid;
-}
-.bookAnchor {
-    font-weight: bold;
-    line-height: 2em;
-    font-size: 1.2em;
 }
 
 .borderless tbody tr td, .borderless tbody tr th {
@@ -205,17 +152,6 @@ select:focus {
     color: #999;
 }
 
-.panel-primary {
-    background-color: #74afad;
-    border-color: #74afad;
-    box-shadow: 0;
-}
-.panel-primary > .panel-heading {
-    color: #efefef;
-    background-color: #74afad;
-    border-color: #74afad;
-}
-
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select,
     input {
@@ -229,26 +165,9 @@ select:focus {
     color: #558c89;
 }
 
-.amen {
-    text-decoration: none;
-    font-size: 20px;
-    font-family: "Lobster", cursive;
-    cursor: pointer;
-}
-.amen:hover {
-    text-decoration: none;
-}
-
 .footnote-title {
     font-family: "Alegreya", "cwTexFangSong", Helvetica, Arial, sans-serif;
     font-weight: bold;
-}
-
-.draggable-btn {
-    padding-right: 15px;
-    width: 100%;
-    text-align: right;
-    cursor: pointer;
 }
 
 .resultIndex {
@@ -256,185 +175,4 @@ select:focus {
     font-family: "Alegreya", "cwTexFangSong", Helvetica, Arial, sans-serif;
     color: #630;
     font-size: 20px;
-}
-
-/* Vertical centered */
-.modal {
-  text-align: center;
-  padding: 0!important;
-}
-
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
-}
-
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
-
-.modal-footer {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-a.copy_to_clipboard {
-    display: none;
-    width: 60px;
-    height: 60px;
-    text-indent: -9999px;
-    position: fixed;
-    z-index: 999;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
-    background: url('../img/copy.png') no-repeat center;
-    background-size: 40px 40px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-}
-
-a.cancel_copy {
-    display: none;
-    width: 60px;
-    height: 60px;
-    text-indent: -9999px;
-    position: fixed;
-    z-index: 999;
-    right: 20px;
-    bottom: 80px;
-    cursor: pointer;
-    background: url('../img/close.png') no-repeat center;
-    background-size: 40px 40px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-}
-
-a.next_book_btn {
-    display: none;
-    width: 60px;
-    height: 60px;
-    text-indent: -9999px;
-    position: fixed;
-    z-index: 999;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
-    background: url('../img/nextCh.svg') no-repeat center;
-    background-size: 80px 80px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-    box-shadow: 0 0 9px #666;
-}
-a.next_book_btn:hover {
-    box-shadow: 0 0 5px #999;
-}
-
-a#toggleSidebarBtn {
-    display: block;
-    width: 60px;
-    height: 60px;
-    text-indent: -9999px;
-    position: fixed;
-    z-index: 999;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
-    background: #cf6;
-    background-size: 60px 60px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-    box-shadow: 0 0 9px #666;
-}
-
-.v_number.chosen:before {
-    font-size: 20px;
-    margin-left: -15px;
-    content: "\2713";
-    color: darkgreen;
-}
-
-@media only screen and (max-width: 768px) {
-    .modal-copy > .modal-dialog {
-        width:90%;
-    }
-}
-
-.navbar-default {
-  background-color: #558c89;
-  border-color: #558c89;
-}
-.navbar-default .navbar-brand {
-  color: #ececea;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #fbfbfb;
-}
-.navbar-default .navbar-text {
-  color: #ececea;
-}
-.navbar-default .navbar-nav > li > a {
-  color: #ececea;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #fbfbfb;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #fbfbfb;
-  background-color: #558c89;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  color: #fbfbfb;
-  background-color: #558c89;
-}
-.navbar-default .navbar-toggle {
-  border-color: #558c89;
-}
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #558c89;
-}
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #ececea;
-}
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-  border-color: #ececea;
-}
-.navbar-default .navbar-link {
-  color: #ececea;
-}
-.navbar-default .navbar-link:hover {
-  color: #fbfbfb;
-}
-
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #ececea;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #fbfbfb;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #fbfbfb;
-    background-color: #558c89;
-  }
 }

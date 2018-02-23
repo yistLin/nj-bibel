@@ -32,11 +32,8 @@ footnote['ch'] = JSON.parse(fs.readFileSync('data/footnote.json', 'utf8'))
 
 // routing
 app.get('/', function(req, res) {
-    var lang = req.query.lang
-    if (lang === undefined) {
-        lang = 'ch'
-    }
-    res.render('books.ejs', {
+    let lang = req.query.lang || 'ch'
+    res.render('books', {
         lang: lang,
         booknames: booknames[lang],
         ot_name: testament[lang]['ot'],
@@ -44,26 +41,15 @@ app.get('/', function(req, res) {
     })
 })
 
-app.get('/chapter', function(req, res) {
-    var lang = req.query.lang
-    var vlang = req.query.vlang
-    var bid = parseInt(req.query.bid)
-    var cid = parseInt(req.query.cid)
+app.get('/test', (req, res) => {
+    res.render('test')
+})
 
-    // handle undefined variables
-    if (lang === undefined) {
-        lang = 'ch'
-    }
-    if (vlang === undefined) {
-        vlang = ''
-    }
-    if (bid === undefined) {
-        bid = 1
-        cid = 1
-    }
-    if (cid === undefined) {
-        cid = 1
-    }
+app.get('/chapter', function(req, res) {
+    let lang = req.query.lang || 'ch'
+    let vlang = req.query.vlang || ''
+    let bid = parseInt(req.query.bid) || 1
+    let cid = parseInt(req.query.cid) || 1
 
     // check the range of bid
     if (bid < 1 || bid > 66) {
@@ -72,29 +58,18 @@ app.get('/chapter', function(req, res) {
     }
 
     // check the range of cid
-    var nb_chapters_this_book = nb_chapters[bid-1]
+    let nb_chapters_this_book = nb_chapters[bid-1]
     if (cid < 1 || cid > nb_chapters_this_book) {
         res.send('cid exceeded the range!')
         return
     }
 
-    // check if previous chapter exists
-    var prev_url = '/chapter?lang='+lang+'&vlang='+vlang+'&bid='+bid+'&cid='+(cid-1)
-    if (cid == 1) {
-        prev_url = ''
-    }
-
-    // check if next chapter exists
-    var next_url = '/chapter?lang='+lang+'&vlang='+vlang+'&bid='+bid+'&cid='+(cid+1)
-    if (cid == nb_chapters_this_book) {
-        next_url = ''
-    }
+    // check if previous or next chapter exists
+    let prev_url = (cid == 1) ? '' : '/chapter?lang='+lang+'&vlang='+vlang+'&bid='+bid+'&cid='+(cid-1)
+    let next_url = (cid == nb_chapters_this_book) ? '' : '/chapter?lang='+lang+'&vlang='+vlang+'&bid='+bid+'&cid='+(cid+1)
 
     // check if vice verses are requested
-    var viceverses = null
-    if (vlang !== '') {
-        viceverses = bible[vlang][bid-1]['chapters'][cid-1]['verses']
-    }
+    let viceverses = (vlang !== '') ? bible[vlang][bid-1]['chapters'][cid-1]['verses'] : null
 
     // render views/chapter.ejs
     res.render('chapter.ejs', {

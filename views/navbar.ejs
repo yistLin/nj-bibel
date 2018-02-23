@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mt-2">
+
+  <a class="navbar-brand" href="/?lang=<%= lang %>">獻上恢復本聖經</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <% if (lang === 'ch') { %>active<% } %>">
+        <a class="nav-link" href="/?lang=ch">中文</a>
+      </li>
+      <li class="nav-item <% if (lang === 'en') { %>active<% } %>">
+        <a class="nav-link" href="/?lang=en">English</a>
+      </li>
+      <li class="nav-item <% if (lang === 'de') { %>active<% } %>">
+        <a class="nav-link" href="/?lang=de">Deutsch</a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" action="/search" type="GET">
+      <input class="form-control form-control-sm mr-sm-2" type="search" name="search" placeholder="Type to search" aria-label="Search">
+      <input type="hidden" name="lang" value="<%= lang %>">
+      <button class="btn btn-sm btn-info my-2 my-sm-0" type="submit">
+        <%= (lang === 'ch') ? '搜尋' : 'Search' %>
+      </button>
+    </form>
+
+  </div>
+
+</nav>

@@ -2,46 +2,22 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <title>Online Bible</title>
-  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css"> -->
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <%- include('header'); %>
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Alegreya' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.light.min.css">
+  <title>Online Bible</title>
 </head>
 
 <body>
+  <div class="container">
 
-<!-- LOGGED IN CONTENT HERE -->
+    <%- include('navbar'); %>
 
-  <div class="container" id="page_content">
-    
-    <div class="row" style="margin-top: 15px; margin-bottom: 0;">
-      <div class="col-md-10 col-md-offset-1">
-        <nav class="navbar navbar-default" style="margin-bottom: 0;">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-xs-8">
-                <a class="navbar-brand" href="/?lang=<%= lang %>">線上恢復本聖經</a>
-              </div>
-              <div class="col-xs-4">
-                <p class="navbar-text draggable-btn"><img src="img/down.svg" width=20></p>
-              </div>
-            </div>
-          </div><!-- /.container-fluid -->
-        </nav>
-      </div>
-    </div>
+    <div class="row">
 
-    <div class="row" style="margin-bottom: 20px;">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default" style="margin-bottom: 0; display: none;" id="dragOutBox">
+      <div class="col-12">
+        <div class="panel panel-default" style="margin-bottom: 0; display: none;">
           <div class="panel-body" style="background-color: #FFFFFF;">
-            
             <!-- GOTO function -->
             <div class="row">
               <div class="col-md-3 col-xs-8 form-group" style="margin-bottom: 15px;">
@@ -64,111 +40,86 @@
                 <button class="btn btn-primary" id="goto_btn">前往</button>
               </div>
             </div> <!-- END of GOTO -->
-
-            <!-- SEARCH function -->
-            <!-- <div class="row">
-              <form action="search.php" method="POST">
-                <div class="col-md-4" style="margin-bottom: 15px;">
-                  <input type="text" class="form-control" name="keyword" placeholder="關鍵字">
-                </div>
-                <div class="col-md-12">
-                  <input type="submit" class="btn btn-default" style="background-color: #D9853B; border-color: #D9853B; color: #FFF;" value="搜尋">
-                </div>
-              </form>
-            </div> -->
-            <!-- END of SEARCH -->
-
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-2 col-md-1">
-                  <% if (prevChapterURL.length != 0) { %>
-                  <a id="upperPrevChBtn" class="change-link" href="<%= prevChapterURL %>">
-                    <img src="img/left.svg" alt="previous" style="height: 16px; color: #f00;">
-                  </a>
-                  <% } %>
-                </div>
-                <div class="col-xs-8 col-md-10">
-                    <h4 class="panel-title text-center" id="chapterTitle">
-                      <span class="ch_verse" style="line-height: 120%;">
-                        <%= bookname %><br>
-                        <span style="font-size: 140%;"><%= chaptername %></span>
-                      </span>
-                    </h4>
-                </div>
-                <div class="col-xs-2 col-md-1">
-                  <% if (nextChapterURL.length != 0) { %>
-                  <a id="upperNextChBtn" class="change-link" style="text-align: right;" href="<%= nextChapterURL %>">
-                    <img src="img/right.svg" alt="next" style="height: 16px; color: #f00;">
-                  </a>
-                  <% } %>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <div class="col-12 mt-2">
+        <div class="card">
 
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <table class="table borderless">
-          <tbody id="verse_container">
-            <% for (verse_n in verses) { %>
-            <tr>
-              <td><span class="v_number"><%= verse_n %></span></td>
-              <td>
-                <span class="<%= lang %>_verse"><%- verses[verse_n] %></span>
-                <% if (vlang !== '') { %>
-                <br>
-                <span class="vice_content <%= vlang%>_verse"><%- vverses[verse_n] %></span>
-                <% } %>
-              </td>
-            </tr>
+          <div class="card-header text-center bg-info">
+            <% if (prevChapterURL.length != 0) { %>
+            <a id="upperPrevChBtn" class="change-link float-left" href="<%= prevChapterURL %>">
+              <img src="img/left.svg" alt="previous" style="height: 16px;">
+            </a>
             <% } %>
-          </tbody>
-        </table>
+
+            <div id="chapterTitle" class="mx-auto">
+              <span class="ch_verse" style="line-height: 120%;">
+                <%= bookname %><br>
+                <span style="font-size: 140%;"><%= chaptername %></span>
+              </span>
+            </div>
+
+            <% if (nextChapterURL.length != 0) { %>
+            <a id="upperNextChBtn" class="change-link float-right" style="text-align: right;" href="<%= nextChapterURL %>">
+              <img src="img/right.svg" alt="next" style="height: 16px;">
+            </a>
+            <% } %>
+          </div> <!-- card-header -->
+
+          <div class="card-body">
+            <table class="table borderless">
+              <tbody id="verse_container">
+                <% for (verse_n in verses) { %>
+                <tr>
+                  <td><span class="v_number"><%= verse_n %></span></td>
+                  <td>
+                    <span class="<%= lang %>_verse"><%- verses[verse_n] %></span>
+                    <% if (vlang !== '') { %>
+                    <br>
+                    <span class="vice_content <%= vlang%>_verse"><%- vverses[verse_n] %></span>
+                    <% } %>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div> <!-- card-body -->
+
+        </div>
       </div>
+
     </div>
 
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <ul class="pager">
-            <li id="lowerPrevChBtn" class="previous">
-              <% if (prevChapterURL.length != 0) { %>
-              <a href="<%= prevChapterURL %>">
-                <span aria-hidden="true">&larr;</span> Prev
-              </a>
-              <% } %>
-            </li>
-            <li id="lowerNextChBtn" class="next">
-              <% if (nextChapterURL.length != 0) { %>
-              <a href="<%= nextChapterURL %>">
-                Next <span aira-hidden="true">&rarr;</span>
-              </a>
-              <% } %>
-            </li>
-        </ul>
+  </div> <!-- END of container -->
+
+  <div class="modal fade" id="fntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fntModalTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="fntModalBody">
+          <p class="footnote-verse">
+            <blockquote>
+              <i id="fntModalVerse">Verse</i>
+            </blockquote>
+          </p>
+          <p class="footnote-content" id="fntModalContent">Footnote</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="loading-modal"></div>
-    <a class="copy_to_clipboard"></a>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/crawler.js"></script>
-    <!-- <script type="text/javascript" src="js/jquery.cookie.js"></script> -->
-    <script type="text/javascript" src="js/jQueryRotate.js"></script>
-    <!-- <script type="text/javascript" src="js/clipboard.min.js"></script> -->
-  
-  </div> <!-- END of page_content -->
+  <%- include('footer'); %>
+  <script type="text/javascript" src="js/main.js"></script>
 
 </body>
 
